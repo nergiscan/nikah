@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nergis & Can - Nikah Davetiyesi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: #f5efe6;
+    font-family: 'Montserrat', sans-serif;
+    color: #6b6357;
+    min-height: 100vh;
+  }
+  .page {
+    max-width: 520px;
+    margin: 0 auto;
+    background: #fbf7f0;
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0,0,0,0.06);
+  }
+  .invite-image {
+    width: 100%;
+    display: block;
+  }
+  .info {
+    padding: 40px 28px 60px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at top, rgba(247, 210, 190, 0.25), transparent 70%),
+      radial-gradient(ellipse at bottom, rgba(200, 190, 220, 0.2), transparent 70%),
+      #fbf7f0;
+  }
+  .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    letter-spacing: 4px;
+    color: #8a7f70;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .countdown {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 46px;
+  }
+  .unit {
+    min-width: 62px;
+  }
+  .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 400;
+    color: #6b6357;
+    line-height: 1;
+  }
+  .unit-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #a59a88;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .location-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    background: transparent;
+    color: #6b6357;
+    border: 1px solid #b8a890;
+    border-radius: 2px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .location-btn:hover {
+    background: #b8a890;
+    color: #fbf7f0;
+  }
+  .location-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #8a7f70;
+    margin-bottom: 4px;
+  }
+  .location-sub {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #a59a88;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: #c9bda8;
+    margin: 0 auto 30px;
+  }
+  .message {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #8a7f70;
+    margin-top: 40px;
+    line-height: 1.6;
+  }
+  @media (max-width: 420px) {
+    .num { font-size: 34px; }
+    .unit { min-width: 52px; }
+    .countdown { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <img src="davetiye.png" alt="Nergis & Can Davetiye" class="invite-image">
+
+    <div class="info">
+      <div class="label">Nikaha Kalan</div>
+      <div class="countdown">
+        <div class="unit">
+          <div class="num" id="days">00</div>
+          <div class="unit-label">Gün</div>
+        </div>
+        <div class="unit">
+          <div class="num" id="hours">00</div>
+          <div class="unit-label">Saat</div>
+        </div>
+        <div class="unit">
+          <div class="num" id="minutes">00</div>
+          <div class="unit-label">Dakika</div>
+        </div>
+        <div class="unit">
+          <div class="num" id="seconds">00</div>
+          <div class="unit-label">Saniye</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="location-name">Erdal İnönü Kent Parkı</div>
+      <div class="location-sub">Antalya · Muratpaşa</div>
+      <a href="https://share.google/9MzaAOGUPWgJApaND" target="_blank" rel="noopener" class="location-btn">Konuma Git</a>
+
+      <div class="message">Sizleri aramızda görmekten<br>mutluluk duyarız.</div>
+    </div>
+  </div>
+
+<script>
+  // Nikah: 23 Mayıs 2026, 17:30
+  const targetDate = new Date('2026-05-23T17:30:00+03:00').getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+      document.getElementById('days').textContent = '00';
+      document.getElementById('hours').textContent = '00';
+      document.getElementById('minutes').textContent = '00';
+      document.getElementById('seconds').textContent = '00';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
