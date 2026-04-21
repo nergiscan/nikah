@@ -10,7 +10,7 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
-    background: #f5efe6;
+    background: #fbf9fc url('bg-texture.png') repeat;
     font-family: 'Montserrat', sans-serif;
     color: #6b6357;
     min-height: 100vh;
@@ -18,7 +18,7 @@
   .page {
     max-width: 520px;
     margin: 0 auto;
-    background: #fbf7f0;
+    background: #fbf9fc url('bg-texture.png') repeat;
     min-height: 100vh;
     box-shadow: 0 0 40px rgba(0,0,0,0.06);
   }
@@ -29,10 +29,6 @@
   .info {
     padding: 40px 28px 60px;
     text-align: center;
-    background:
-      radial-gradient(ellipse at top, rgba(247, 210, 190, 0.25), transparent 70%),
-      radial-gradient(ellipse at bottom, rgba(200, 190, 220, 0.2), transparent 70%),
-      #fbf7f0;
   }
   .label {
     font-family: 'Cormorant Garamond', serif;
@@ -48,9 +44,7 @@
     gap: 14px;
     margin-bottom: 46px;
   }
-  .unit {
-    min-width: 62px;
-  }
+  .unit { min-width: 62px; }
   .num {
     font-family: 'Cormorant Garamond', serif;
     font-size: 42px;
@@ -64,6 +58,40 @@
     color: #a59a88;
     text-transform: uppercase;
     margin-top: 6px;
+  }
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: #c9bda8;
+    margin: 0 auto 30px;
+  }
+  .location-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #8a7f70;
+    margin-bottom: 4px;
+  }
+  .location-sub {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #a59a88;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+  }
+  .map-wrap {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto 20px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(107, 99, 87, 0.15);
+    border: 1px solid rgba(184, 168, 144, 0.3);
+  }
+  .map-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 260px;
+    border: 0;
   }
   .location-btn {
     display: inline-block;
@@ -83,37 +111,11 @@
     background: #b8a890;
     color: #fbf7f0;
   }
-  .location-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: #8a7f70;
-    margin-bottom: 4px;
-  }
-  .location-sub {
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: #a59a88;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-  }
-  .divider {
-    width: 40px;
-    height: 1px;
-    background: #c9bda8;
-    margin: 0 auto 30px;
-  }
-  .message {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: #8a7f70;
-    margin-top: 40px;
-    line-height: 1.6;
-  }
   @media (max-width: 420px) {
     .num { font-size: 34px; }
     .unit { min-width: 52px; }
     .countdown { gap: 8px; }
+    .map-wrap iframe { height: 220px; }
   }
 </style>
 </head>
@@ -124,36 +126,30 @@
     <div class="info">
       <div class="label">Nikaha Kalan</div>
       <div class="countdown">
-        <div class="unit">
-          <div class="num" id="days">00</div>
-          <div class="unit-label">Gün</div>
-        </div>
-        <div class="unit">
-          <div class="num" id="hours">00</div>
-          <div class="unit-label">Saat</div>
-        </div>
-        <div class="unit">
-          <div class="num" id="minutes">00</div>
-          <div class="unit-label">Dakika</div>
-        </div>
-        <div class="unit">
-          <div class="num" id="seconds">00</div>
-          <div class="unit-label">Saniye</div>
-        </div>
+        <div class="unit"><div class="num" id="days">00</div><div class="unit-label">Gün</div></div>
+        <div class="unit"><div class="num" id="hours">00</div><div class="unit-label">Saat</div></div>
+        <div class="unit"><div class="num" id="minutes">00</div><div class="unit-label">Dakika</div></div>
+        <div class="unit"><div class="num" id="seconds">00</div><div class="unit-label">Saniye</div></div>
       </div>
 
       <div class="divider"></div>
 
       <div class="location-name">Erdal İnönü Kent Parkı</div>
       <div class="location-sub">Antalya · Muratpaşa</div>
-      <a href="https://share.google/9MzaAOGUPWgJApaND" target="_blank" rel="noopener" class="location-btn">Konuma Git</a>
 
-      <div class="message">Sizleri aramızda görmekten<br>mutluluk duyarız.</div>
+      <div class="map-wrap">
+        <iframe
+          src="https://maps.google.com/maps?q=36.861392,30.728644&hl=tr&z=16&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+
+      <a href="https://share.google/9MzaAOGUPWgJApaND" target="_blank" rel="noopener" class="location-btn">Konuma Git</a>
     </div>
   </div>
 
 <script>
-  // Nikah: 23 Mayıs 2026, 17:30
   const targetDate = new Date('2026-05-23T17:30:00+03:00').getTime();
 
   function updateCountdown() {
@@ -161,17 +157,14 @@
     const diff = targetDate - now;
 
     if (diff <= 0) {
-      document.getElementById('days').textContent = '00';
-      document.getElementById('hours').textContent = '00';
-      document.getElementById('minutes').textContent = '00';
-      document.getElementById('seconds').textContent = '00';
+      ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
       return;
     }
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
 
     document.getElementById('days').textContent = String(days).padStart(2, '0');
     document.getElementById('hours').textContent = String(hours).padStart(2, '0');
